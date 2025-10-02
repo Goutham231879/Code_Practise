@@ -1,29 +1,27 @@
-def add_mat(mat , i , j):
-    mat[i].append(j)
-    mat[j].append(i)
+from collections import deque
+
+def bfs(adj, start=0):
+    v = len(adj)
+    res = []
+    q = deque()
+    vis = [False] * v
+
+    vis[start] = True
+    q.append(start)
+
+    while q:
+        x = q.popleft()
+        res.append(x)
+
+        for i in adj[x]:
+            if not vis[i]:
+                vis[i] = True
+                q.append(i)
+
+    return res
 
 
-def display(mat):
-
-    for i in range(len(mat)):
-        print(i,':',end=" ")
-        for j in mat[i]:
-            print(j,end=" ")
-        print()
-
-    print()
-
-v = 4
-
-mat = [ []  for _ in range(v   )]
-
-add_mat(mat,0,1)
-add_mat(mat,0,2)
-add_mat(mat,1,2)
-add_mat(mat,2,3)
-
-
-display(mat)
-
-
-
+# Example graph
+adj = [[1,2], [0,2,3], [0,4], [1,4], [2,3]]
+print("BFS starting from 0:", bfs(adj, 0))
+print("BFS starting from 2:", bfs(adj, 2))
