@@ -1,42 +1,25 @@
-def addEdge(i, j, mat):
-    mat[i].append(j)
-    
-
-def display(mat):
-    for i in range(len(mat)):
-        print(f"{i} -> ", end="")
-        for j in mat[i]:
-            print(j, end=" ")
-        print("")
-
-
-def transpose(mat, tran):
-    for i in range(len(mat)):
-        for j in mat[i]:
-            tran[j].append(i)   # Reverse the direction of edge
+#bfs
+from collections import deque
+def bfs(mat, src):
+    vis = [False]*len(mat)
+    q=deque()
+    q.append(src)
+    vis[src]=True
+    while q:
+        x = q.popleft()
+        print(x,end=" ")
+        for i in mat[x]:
+            if not vis[i]:
+                q.append(i)
+                vis[i]=True
 
 
-# Number of vertices
-v = 5
 
-# Original and transpose adjacency lists
-mat = [[] for _ in range(v)]
-tra = [[] for _ in range(v)]
 
-# Add edges
-addEdge(0, 1, mat) 
-addEdge(0, 4, mat) 
-addEdge(0, 3, mat) 
-addEdge(2, 0, mat) 
-addEdge(3, 2, mat) 
-addEdge(4, 1, mat) 
-addEdge(4, 3, mat)
 
-print("Original Graph:")
-display(mat)
+mat =[[1,2], [0,2,3], [0,1,4], [1,4], [2,3]]
 
-# Build transpose
-transpose(mat, tra)
+src = 1
 
-print("\nTranspose Graph:")
-display(tra)
+print("bfs of the graph")
+bfs(mat,src)
