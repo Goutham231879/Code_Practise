@@ -23,11 +23,18 @@ def bfs(gp , st):
 
 
 n = 4
+edges = [
+    (1, 2),
+    (1, 3),
+    (1, 4),
+    (3, 4)
+]
+
 gp = [[] for _ in range(n+1)]
-gp[1].append(2)
-gp[1].append(3)
-gp[2].append(4)
-gp[3].append(4)
+
+for u , v in edges:
+    gp[u].append(v)
+    gp[v].append(u)
 
 print("bfs")
 bfs(gp , 1)
